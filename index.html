@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebRTC demo</title>
+        <style>
+            body{
+                margin: 0;
+                height: (var(--vh, 1vh) * 100);
+                position: relative;
+            }
+            .viewer{
+                position: relative;
+                height: 100%;
+                top: 0;
+            }
+
+            video {
+                height: 100%;
+                position: relative;
+            }
+            #joyDiv{
+                width: 200px;
+                height: 200px;
+                margin: 20px;
+                position: fixed;
+                z-index: 10;
+                top: 600px;
+                left: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="joyDiv"></div>
+        <div class="viewer">
+            <video id="player" autoplay="true" playsinline="true"  muted="true"></video>
+        </div>
+        <script type="module">
+            import { start } from "./client.js"
+            start()
+        </script>
+        <script>
+            let vh = window.innerHeight * 0.01;
+            // Then we set the value in the --vh custom property to the root of the document
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            window.addEventListener('resize', () => {
+                // We execute the same script as before
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            });
+        </script>
+    </body>
+</html>
